@@ -2,10 +2,16 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FaGoogle,FaGithub } from "react-icons/fa";
 import { AuthContext } from '../context/AuthContext';
+import { DataContext } from '../context/DataPovider';
+
 
 const Register = () => {
-    const {name} = useContext(AuthContext)
-    console.log(name)
+    const {createUser,googleLogin, githubLogin} = useContext(AuthContext)
+    const {chefs}= useContext(DataContext)
+    console.log(chefs)
+    
+
+
     const handleSubmit = (event)=>{
         event.preventDefault()
         const form = event.target;
@@ -13,7 +19,22 @@ const Register = () => {
         const password = form.password.value;
         const photo = form.photo.value;
         const name = form.name.value;
+
+        createUser(email,password)
+        .then(result => console.log(result.user))
+        .catch(error => console.log(error.message))
+        form.reset()
         console.log(email,password,name,photo);
+    }
+    const handleGoogle = () => {
+        googleLogin()
+        .then(result => console.log(result.user))
+        .catch(error => console.log(error.message))
+    }
+    const handleGithub = () => {
+        githubLogin()
+        .then(result => console.log(result.user))
+        .catch(error => console.log(error.message))
     }
     return (
         <div>
@@ -54,12 +75,12 @@ const Register = () => {
                     </div>
 
                 </div>
-                <div className='btn bg-white'>
+                <div onClick={handleGoogle} className='btn bg-white ursor-pcointer'>
                     <span><FaGoogle></FaGoogle></span>
                     <p className=''>Login With Google</p>
                 </div>
                 <br />
-                <div className='btn bg-white mt-3'>
+                <div onClick={handleGithub} className='btn bg-white ursor-pcointer'>
                     <span><FaGithub></FaGithub></span>
                     <p className=''>Login With Github</p>
                 </div>

@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FaGoogle,FaGithub } from "react-icons/fa";
+import { AuthContext } from '../context/AuthContext';
 
 const Login = () => {
+    const {logIn,googleLogin} = useContext(AuthContext)
     const handleSubmit = (event)=>{
         event.preventDefault()
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
+        logIn(email,password)
+        .then(result => console.log(result.user))
+        .catch(error => console.log(error.message))
+        form.reset()
         console.log(email,password);
+    }
+    const handleGoogle = () => {
+        googleLogin()
+        .then(result => console.log(result.user))
+        .catch(error => console.log(error.message))
     }
     return (
         <>
@@ -39,7 +50,7 @@ const Login = () => {
                 </div>
 
             </div>
-            <div className='btn bg-white'>
+            <div onClick={handleGoogle} className='btn bg-white ursor-pcointer'>
                 <span><FaGoogle></FaGoogle></span>
                 <p className=''>Login With Google</p>
             </div>

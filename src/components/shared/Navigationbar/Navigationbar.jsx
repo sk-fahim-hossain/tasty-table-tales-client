@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import logo from '../../../assets/brand-logo.png';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../context/AuthContext';
 
 const Navigationbar = () => {
+    const {loggedUser,loading} = useContext(AuthContext)
+    
     return (
         <>
             <div>
@@ -19,9 +22,9 @@ const Navigationbar = () => {
                                 <li><a>Login</a></li>
                             </ul>
                         </div>
-                        <a className="btn btn-ghost normal-case text-xl">
+                        <Link to="/" className="btn btn-ghost normal-case text-xl">
                             <img src={logo} style={{ height: '50px' }} alt="" />
-                        </a>
+                        </Link>
                     </div>
 
                     <div className="navbar-center hidden lg:flex">
@@ -34,7 +37,7 @@ const Navigationbar = () => {
                         </ul>
                     </div>
                     <div className="navbar-end">
-                        <a className="btn ">Submit Recipe</a>
+                       {loggedUser ?  <p className="btn">{loggedUser.displayName}</p> : <p>Loading..</p>} 
                     </div>
                 </div>
             </div>
