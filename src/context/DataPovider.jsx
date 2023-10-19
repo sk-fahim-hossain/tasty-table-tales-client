@@ -6,10 +6,10 @@ const DataProvider = ({children}) => {
     const[chefs,setChefs] = useState(null)
     const[recipes,setRecipes] = useState(null)
     useEffect(()=>{
-        fetch('http://localhost:5000/chefs')
+        fetch('https://tastytable-hsgd437xv-fahim-hossains-projects.vercel.app/chefs')
         .then(res => res.json())
         .then(data => setChefs(data))
-        fetch('http://localhost:5000/recipes')
+        fetch('https://tastytable-hsgd437xv-fahim-hossains-projects.vercel.app/recipes')
         .then(res => res.json())
         .then(info =>setRecipes(info) )
     },[])

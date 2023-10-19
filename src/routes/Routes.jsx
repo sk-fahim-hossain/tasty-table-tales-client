@@ -29,7 +29,7 @@ const router = createBrowserRouter([
             {
                 path:'/chefs/:id',
                 element:<ChefDetails/>,
-                loader: ({params})=>fetch(`http://localhost:5000/chefs/${params.id}`),
+                loader: ({params})=>fetch(`https://tastytable-hsgd437xv-fahim-hossains-projects.vercel.app/chefs/${params.id}`),
             },
             {
                 path:'/about',
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
             {
                 path:'/blog',
                 element:<Blog></Blog>,
-                loader: () =>fetch('http://localhost:5000/blogs')
+                loader: () =>fetch('https://tastytable-hsgd437xv-fahim-hossains-projects.vercel.app/blogs')
             },
         ]
     },
