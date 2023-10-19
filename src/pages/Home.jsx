@@ -3,6 +3,7 @@ import Hero from '../components/Hero/Hero';
 import { DataContext } from '../context/DataPovider';
 import { IoRestaurantSharp } from 'react-icons/io5';
 import TransBanner from '../components/TransBanner/TransBanner';
+import Chefs from '../components/Chefs/Chefs';
 
 const Home = () => {
     const { recipes } = useContext(DataContext)
@@ -12,10 +13,8 @@ const Home = () => {
         for (const recipe of recipes) {
             const arrayRercipe = recipe.chefRecipes
             const RecipesNames = arrayRercipe.map(r => allRecipes.push(r.name))
-            console.log(RecipesNames)
         }
     }
-    console.log(allRecipes);
     return (
         <div>
             <Hero></Hero>
@@ -33,6 +32,7 @@ const Home = () => {
                 </div>
             </div>
             <TransBanner></TransBanner>
+            <Chefs></Chefs>
         </div>
     );
 };

@@ -8,7 +8,7 @@ import { DataContext } from '../context/DataPovider';
 const Register = () => {
     const {createUser,googleLogin, githubLogin} = useContext(AuthContext)
     const {chefs}= useContext(DataContext)
-    console.log(chefs)
+   
     
 
 
