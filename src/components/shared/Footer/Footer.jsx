@@ -1,6 +1,8 @@
 import React from 'react';
 import brandLogo from '../../../assets/brand-logo.png'
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+
 
 const Footer = () => {
     return (
@@ -29,8 +31,8 @@ const Footer = () => {
                     <div>
                         <h3 className='text-2xl'><i>Newsletter Subscriber</i></h3>
                         <div className="flex align-middle justify-center mt-4">
-                            <input type="email" name="" id="" className="bg-slate-200 rounded-md text-black ps-3" placeholder="Email" />
-                            <div className="btn bg-orange-400">send</div>
+                            <input type="email" name="" id="news-letter" className="bg-slate-200 rounded-md text-black ps-3" placeholder="Email" />
+                            <div className="btn bg-orange-400" onClick={()=>{toast.success('Thank for subscribe') ;document.getElementById("news-letter").value=''}}>send</div>
                         </div>
                     </div>
 

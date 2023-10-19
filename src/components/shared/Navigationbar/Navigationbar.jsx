@@ -1,11 +1,20 @@
 import React, { useContext } from 'react';
 import logo from '../../../assets/brand-logo.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthContext';
+import toast from 'react-hot-toast';
 
 const Navigationbar = () => {
-    const {loggedUser,loading} = useContext(AuthContext)
-    
+    const { loggedUser, loading, logOut } = useContext(AuthContext)
+    const navigate = useNavigate();
+    const userLogOut = () => {
+        logOut()
+            .then(() => {
+                toast('Log Out SuccessFully')
+                navigate('/')
+            })
+            .catch(error => toast.error(error.message))
+    }
     return (
         <>
             <div>
@@ -18,7 +27,7 @@ const Navigationbar = () => {
                             {/* small devices menubar/breadcam menu items here  */}
                             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-white">
                                 <li><a>Home</a></li>
-                               
+
                                 <li><a>Login</a></li>
                             </ul>
                         </div>
@@ -32,18 +41,25 @@ const Navigationbar = () => {
                             <li><Link to="/">Home</Link></li>
                             <li><Link to="/about">About Us</Link></li>
                             <li><Link to="/blog">Blog</Link></li>
-                           
+
                         </ul>
                     </div>
                     <div className="navbar-end">
-                       {loggedUser ?  <p className="btn">{loggedUser.displayName}</p> : <p>Loading..</p>} 
+                        {loggedUser &&
+                            <div className='flex'>
+                                <p className="btn">{loggedUser.email}</p>
+                                <p className="px-2 py-1 mx-2 rounded-sm  bordered border-2 cursor-pointer hover:bg-slate-100" onClick={userLogOut}><small>Logout</small></p>
+                            </div>
+
+                            }
+
                     </div>
                 </div>
             </div>
 
 
 
-           
+
         </>
     );
 };

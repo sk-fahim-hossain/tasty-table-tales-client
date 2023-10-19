@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaGoogle,FaGithub } from "react-icons/fa";
 import { AuthContext } from '../context/AuthContext';
 import { DataContext } from '../context/DataPovider';
+import toast from 'react-hot-toast';
 
 
 const Register = () => {
@@ -10,7 +11,7 @@ const Register = () => {
     const {chefs}= useContext(DataContext)
    
     
-
+    const navigate = useNavigate()
 
     const handleSubmit = (event)=>{
         event.preventDefault()
@@ -21,20 +22,30 @@ const Register = () => {
         const name = form.name.value;
 
         createUser(email,password)
-        .then(result => console.log(result.user))
-        .catch(error => console.log(error.message))
+        .then(result =>{
+            toast.success('User Created Successfully..!')
+            navigate('/')
+            console.log(result.user)
+        })
+        .catch(error => toast.error(error.message))
         form.reset()
         console.log(email,password,name,photo);
     }
     const handleGoogle = () => {
         googleLogin()
-        .then(result => console.log(result.user))
-        .catch(error => console.log(error.message))
+        .then(result => {
+            toast.success('Google Login Successfully..!')
+            navigate('/')
+        })
+        .catch(error => toast.error(error.message))
     }
     const handleGithub = () => {
         githubLogin()
-        .then(result => console.log(result.user))
-        .catch(error => console.log(error.message))
+        .then(result =>{
+            toast.success('Google Login Successfully..!')
+            navigate('/')
+        })
+        .catch(error => toast.error(error.message))
     }
     return (
         <div>
